@@ -1,5 +1,5 @@
 # different_bones_sorting-function
-An R function for sorting different long bones (femur, tibia, humerus) utilizing cross-sectional geometric properties of 3D long bone models. 
+An R function for sorting different long bones (femur, tibia, humerus) utilizing cross-sectional geometric properties of 3D long bone models and Support Vector Machine models. 
 
 The present function allows the user to utilize a set of diaphyseal cross-sectional geometric properties of long bones (femur, tibia, and humerus), which have been previously extracted from 3D bone models using the [*csg-toolkit* GNU Octave package](https://github.com/pr0m1th3as/long-bone-diaphyseal-CSG-Toolkit/tree/v1.0.1). The only requirement for the `db_sorting` function is the CSV file that's computed from the *csg-toolkit* containing all the measurements for every individual of the desired sample. In order to use the function, the user must first download this repository from GitHub. Then, the downloaded folder must be unzipped and the CSV data file must be copied inside the epiphyses_sorting folder. All necessary libraries are installed and loaded directly by the function.
 
