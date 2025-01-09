@@ -13,7 +13,7 @@ A message showing the successful installation of the necessary packages will sho
 db_sorting(bone_1, bone_2, distance)
 ```
 The three inputs the `db_sorting` requires are: 
-1. bone: "femur", "tibia", or "humerus" - the two chosen bones are those utilized for the algorithm (e.g. femur and tibia)
+1. bone: "femur", "tibia", or "humerus" - the two chosen bones are those utilized for the algorithm (e.g. femur and tibia). The order must be as such: femur-tibia, femur-humerus.
 2. distance: "euclidean", "maximum", "manhattan", "canberra", or "minkowski" (the default p for minkowski is 1.5)
 
 This will open a window of the working directory, where the user can choose the CSV files containing the measurements. The function will then display a message reporting the number of samples from the data file. The results of the analysis are saved in .csv files:
@@ -21,4 +21,4 @@ This will open a window of the working directory, where the user can choose the 
 2. regarding the sample statistics (sample size, definite matches, number of excluded pairs, True Negative Rate, number of false negatives)
 3. regarding the plausible pairs
 
-A testing dataset for each long bone will be provided as a use case. Currently, the software supports femur and tibia bones.
+A testing dataset for each long bone will be provided as a use case. Currently, the software supports femur and tibia combination of bones, as well as femur and humerus bones.
