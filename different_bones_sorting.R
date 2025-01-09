@@ -15,10 +15,18 @@ db_sorting <- function(bone_1, bone_2, distance)
   
   # Data loading and prep
   data_1 <- read.csv(file.choose(new=TRUE))
-  data_1 <- data_1[,-c(3:7, 12, 15, 20, 23, 31, 39, 47)]
-  
   data_2 <- read.csv(file.choose(new=TRUE))
-  data_2 <- data_2[,-c(3:7, 12, 15, 20, 23, 31, 39, 47)]
+  
+  if (bone_1 == "femur" && bone_2 == "tibia" || bone_1 == "tibia" & bone_2 == "femur")
+  {
+    data_1 <- data_1[,-c(3:7, 12, 15, 20, 23, 31, 39, 47)]
+    data_2 <- data_2[,-c(3:7, 12, 15, 20, 23, 31, 39, 47)]
+  } else if (bone_1 == "femur" && bone_2 == "humerus" || bone_1 == "humerus" & bone_2 == "femur")
+  {
+    data_1 <- data_1[,-c(3:7, 15, 23, 31, 36, 47)] 
+    data_2 <- data_2[,-c(3:7, 15, 23, 31, 36, 47)] 
+  }
+  
   
   # Welcoming message
   print("Hello!")
@@ -35,7 +43,9 @@ db_sorting <- function(bone_1, bone_2, distance)
   
   # Dataset prep
   
-  var_names <- colnames(data_1[2:35])
+  cols <- ncol(data_1)
+  
+  var_names <- colnames(data_1[2:cols])
   
   sample_ids_1 <- data_1[,1]
   sample_ids_2 <- data_2[,1]
@@ -46,20 +56,20 @@ db_sorting <- function(bone_1, bone_2, distance)
   y <- 0
   x <- 0
   
-  for (i in 1:34)
+  for (i in 1:(cols-1))
   {
     y[i] <- paste0("Y",i)
     x[i] <- paste0("X",i)
   }
   
-  colnames(data_1)[2:35] <- y
-  colnames(data_2)[2:35] <- x
+  colnames(data_1)[2:cols] <- y
+  colnames(data_2)[2:cols] <- x
   
   # Predicting the bone_1 variables
   class_1 <- readRDS(paste0("./files/", bone_1, "_", bone_2, "_model.rds"))
   vars <- y
   predY <- 0
-     for (i in 1:34)
+     for (i in 1:(cols-1))
         {
           mlm1 <- class_1[[i]]
           
@@ -76,7 +86,7 @@ db_sorting <- function(bone_1, bone_2, distance)
   class_2 <- readRDS(paste0("./files/", bone_2, "_", bone_1, "_model.rds"))
   vars <- x
   predY <- 0
-    for (i in 1:34)
+    for (i in 1:(cols-1))
         {
           mlm2 <- class_2[[i]]
           
@@ -117,10 +127,10 @@ db_sorting <- function(bone_1, bone_2, distance)
         mism <- 0
         fn <- 0
         
-        dif_1 <- matrix(0, nrow=nrow(pred_1), ncol=34)
+        dif_1 <- matrix(0, nrow=nrow(pred_1), ncol=(cols-1))
         for (d in 1:nrow(pred_1))
         {
-          x <- abs(data_1[i, 2:35] - pred_1[d,])
+          x <- abs(data_1[i, 2:cols] - pred_1[d,])
           dif_1[d, ] <- as.numeric(x)
         }
         
@@ -130,14 +140,14 @@ db_sorting <- function(bone_1, bone_2, distance)
         {
           y_idx <-0
           #print(k)
-          for (j in 1:34)
+          for (j in 1:(cols-1))
           {
             if (between(dif_1[k,j], l_thr_1[j], u_thr_1[j]))
             {
               y_idx <- y_idx + 1
             }
           }
-          if (y_idx == 34)
+          if (y_idx == (cols-1))
           {
             pr_idx <- as.numeric(row.names(dif_1)[k])
             pr_sample[k] <- sample_ids_2[pr_idx]
@@ -164,7 +174,7 @@ db_sorting <- function(bone_1, bone_2, distance)
         
         el_pred_1 <- pred_1[el, ]
         
-        true <- data_1[i, 2:35]
+        true <- data_1[i, 2:cols]
         name <- rownames(true)
         rownames(true) <- c("true")
         
@@ -236,10 +246,10 @@ db_sorting <- function(bone_1, bone_2, distance)
     mism <- 0
     fn <- 0
     
-    dif_2 <- matrix(0, nrow=nrow(pred_2), ncol=34)
+    dif_2 <- matrix(0, nrow=nrow(pred_2), ncol=(cols-1))
     for (d in 1:nrow(pred_2))
     {
-      x <- abs(data_2[i, 2:35] - pred_2[d,])
+      x <- abs(data_2[i, 2:cols] - pred_2[d,])
       dif_2[d, ] <- as.numeric(x)
     }
     
@@ -249,14 +259,14 @@ db_sorting <- function(bone_1, bone_2, distance)
     {
       y_idx <-0
       #print(k)
-      for (j in 1:34)
+      for (j in 1:(cols-1))
       {
         if (between(dif_2[k,j], l_thr_2[j], u_thr_2[j]))
         {
           y_idx <- y_idx + 1
         }
       }
-      if (y_idx == 34)
+      if (y_idx == (cols-1))
       {
         pr_idx <- as.numeric(row.names(dif_2)[k])
         pr_sample[k] <- sample_ids_1[pr_idx]
@@ -283,7 +293,7 @@ db_sorting <- function(bone_1, bone_2, distance)
     
     el_pred_2 <- pred_2[el, ]
     
-    true <- data_2[i, 2:35]
+    true <- data_2[i, 2:cols]
     name <- rownames(true)
     rownames(true) <- c("true")
     
