@@ -21,4 +21,4 @@ This will open a window of the working directory, where the user can choose the 
 2. regarding the sample statistics (sample size, definite matches, number of excluded pairs, True Negative Rate, number of false negatives)
 3. regarding the plausible pairs
 
-A testing dataset for each long bone will be provided as a use case. Currently, the software supports femur and tibia combination of bones, as well as femur and humerus bones.
+A testing dataset for each long bone will be provided as a use case. Currently, the software supports femur and tibia combination of bones, femur and humerus bones, as well as tibia and humerus bones.
