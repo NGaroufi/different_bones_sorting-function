@@ -223,7 +223,7 @@ db_sorting <- function(bone_1, bone_2, side, distance, threshold_value, ground_t
                       "TNR", "# of False Negatives")
     
     write.csv(stats, paste0("stats_", bone_1, "_", distance ,
-                            "_", theshold_value,".csv"))
+                            "_", threshold_value,".csv"))
             
     five_pr<-cbind(data_1[,1], five_pr)
             
@@ -234,14 +234,14 @@ db_sorting <- function(bone_1, bone_2, side, distance, threshold_value, ground_t
     five_pr_1 <- five_pr
     
     write.csv(five_pr_1, paste0("pred_", bone_1, "_", distance ,
-                                "_", theshold_value,".csv"))
+                                "_", threshold_value,".csv"))
     
     plausible <- cbind(data_1[,1], plausible)
     write.csv(plausible, paste0("plausible_", bone_1, "_", distance ,
-                                "_", theshold_value,".csv"))
+                                "_", threshold_value,".csv"))
     
     write.csv(five_pr_1, paste0("pred_", bone_1, "_", distance ,
-                                "_", theshold_value,".csv"))
+                                "_", threshold_value,".csv"))
     
     single_elements <- five_pr_1[five_pr_1[,2]==0,1]
     se_1 <- sum(single_elements %in% single_1)
@@ -348,7 +348,7 @@ db_sorting <- function(bone_1, bone_2, side, distance, threshold_value, ground_t
                       "TNR", "# of False Negatives")
     
     write.csv(stats, paste0("stats_", bone_2, "_", distance ,
-                            "_", theshold_value,".csv"))
+                            "_", threshold_value,".csv"))
     
     five_pr<-cbind(data_2[,1], five_pr)
     
@@ -359,21 +359,21 @@ db_sorting <- function(bone_1, bone_2, side, distance, threshold_value, ground_t
     five_pr_2 <- five_pr
     
     write.csv(five_pr_2, paste0("pred_", bone_2, "_", distance ,
-                                "_", theshold_value,".csv"))
+                                "_", threshold_value,".csv"))
     
     plausible <- cbind(data_2[,1], plausible)
     write.csv(plausible, paste0("plausible_", bone_2, "_", distance ,
-                                "_", theshold_value,".csv"))
+                                "_", threshold_value,".csv"))
     
     single_elements <- five_pr_2[five_pr_2[,2]==0,1]
     se_2 <- sum(single_elements %in% single_1)
     
     plausible <- cbind(data_2[,1], plausible)
     write.csv(plausible, paste0("plausible_", bone_2, "_", distance ,
-                                "_", theshold_value,".csv"))
+                                "_", threshold_value,".csv"))
         
     write.csv(five_pr_2, paste0("pred_", bone_2, "_", distance ,
-                                "_", theshold_value,".csv"))
+                                "_", threshold_value,".csv"))
     
     # Single Elements
     
@@ -381,7 +381,7 @@ db_sorting <- function(bone_1, bone_2, side, distance, threshold_value, ground_t
     colnames(singles) <- c(bone_1, bone_2)
     
     write.csv(singles, paste0("singles_", bone_1, "_", bone_2, "_", distance, 
-                              "_", theshold_value, ".csv"))
+                              "_", threshold_value, ".csv"))
     
   } else if (ground_truth == FALSE)
     {
@@ -583,7 +583,7 @@ db_sorting <- function(bone_1, bone_2, side, distance, threshold_value, ground_t
       names(stats) <- c("Sample size", "# of Excluded")
       
       write.csv(stats, paste0("stats_", bone_1, "_", distance ,
-                              "_", theshold_value,".csv"))
+                              "_", threshold_value,".csv"))
       
       five_pr<-cbind(data_1[,1], five_pr)
       
@@ -594,18 +594,18 @@ db_sorting <- function(bone_1, bone_2, side, distance, threshold_value, ground_t
       five_pr_1 <- five_pr
       
       write.csv(five_pr_1, paste0("pred_", bone_1, "_", distance ,
-                                  "_", theshold_value,".csv"))
+                                  "_", threshold_value,".csv"))
       
       plausible <- cbind(data_1[,1], plausible)
       write.csv(plausible, paste0("plausible_", bone_1, "_", distance ,
-                                  "_", theshold_value,".csv"))
+                                  "_", threshold_value,".csv"))
       
       write.csv(five_pr_1, paste0("pred_", bone_1, "_", distance ,
-                                  "_", theshold_value,".csv"))
+                                  "_", threshold_value,".csv"))
       
       single_elements_1 <- five_pr_1[five_pr_1[,2]==0,1]
       write.csv(single_elements_1, paste0("singles_", bone_1, "_", distance ,
-                                          "_", theshold_value, ".csv"))
+                                          "_", threshold_value, ".csv"))
       #se_1 <- sum(single_elements %in% single_1)
       
       # Bone 2 - Minimum five
@@ -707,7 +707,7 @@ db_sorting <- function(bone_1, bone_2, side, distance, threshold_value, ground_t
       names(stats) <- c("Sample size", "# of Excluded")
       
       write.csv(stats, paste0("stats_", bone_2, "_", distance ,
-                              "_", theshold_value,".csv"))
+                              "_", threshold_value,".csv"))
       
       five_pr<-cbind(data_2[,1], five_pr)
       
@@ -718,23 +718,23 @@ db_sorting <- function(bone_1, bone_2, side, distance, threshold_value, ground_t
       five_pr_2 <- five_pr
       
       write.csv(five_pr_2, paste0("pred_", bone_2, "_", distance ,
-                                  "_", theshold_value,".csv"))
+                                  "_", threshold_value,".csv"))
       
       plausible <- cbind(data_2[,1], plausible)
       write.csv(plausible, paste0("plausible_", bone_2, "_", distance ,
-                                  "_", theshold_value,".csv"))
+                                  "_", threshold_value,".csv"))
       
       single_elements_2 <- five_pr_2[five_pr_2[,2]==0,1]
       write.csv(single_elements_2, paste0("singles_", bone_2, "_", distance ,
-                                          "_", theshold_value,".csv"))
+                                          "_", threshold_value,".csv"))
       #se_2 <- sum(single_elements %in% single_1)
       
       plausible <- cbind(data_2[,1], plausible)
       write.csv(plausible, paste0("plausible_", bone_2, "_", distance ,
-                                  "_", theshold_value,".csv"))
+                                  "_", threshold_value,".csv"))
       
       write.csv(five_pr_2, paste0("pred_", bone_2, "_", distance ,
-                                  "_", theshold_value,".csv"))
+                                  "_", threshold_value,".csv"))
       
       # Single Elements
       # singles <- cbind(se_1, se_2)
