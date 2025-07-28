@@ -366,7 +366,7 @@ db_sorting <- function(bone_1, bone_2, side, distance, threshold_value, ground_t
                                 "_", threshold_value,".csv"))
     
     single_elements <- five_pr_2[five_pr_2[,2]==0,1]
-    se_2 <- sum(substr(single_elements, 1, 6) %in% single_1)
+    se_2 <- sum(substr(single_elements, 1, 6) %in% single_2)
     
     plausible <- cbind(data_2[,1], plausible)
     write.csv(plausible, paste0("plausible_", bone_2, "_", distance ,
